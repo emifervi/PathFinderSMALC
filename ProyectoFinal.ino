@@ -70,16 +70,16 @@ void puenteZitoZurdo(){
 void giro(){
   double d1, d2;
   // gira a la izquierda el Ultrasonico
-  motorcito.write(-90);
+  motorcito.write(180);
   ultrasonico();
   d1 = distancia;
   // gira a la derecha el Ultrasonico
-  motorcito.write(180);
+  motorcito.write(0);
   ultrasonico();
   d2 = distancia;
 
   //decide la distancia
-  motorcito.write(-90);
+  motorcito.write(90);
   if(d1 > d2){
     puenteZitoDerecha();
   }
@@ -101,23 +101,10 @@ void estatus(int color){
   }
 }
 
-void arcoiriZ(){
-  //Hacer arcoiris con los leds;
-  digitalWrite(patitaRoja, HIGH);
-  delay(100);
-  digitalWrite(patitaRoja, LOW);
-  digitalWrite(patitaVerde, HIGH);
-  delay(100);
-  digitalWrite(patitaVerde, LOW);
-  digitalWrite(patitaAzul, HIGH);
-  delay(100);
-  digitalWrite(patitaAzul, LOW);
-  
-}
-
 void setup() {
   // declarar el servo
   motorcito.attach(6);
+  motorcito.write(90);
   // put your setup code here, to run once:
   pinMode(led, OUTPUT);
   Serial.begin(9600);
@@ -135,7 +122,10 @@ void loop() {
   ultrasonico();
   if(distancia < 7){
     puenteZitoZtop();
+    puenteZitoReverZa();
+    delay(30);
     giro();
+    delay() // falta configurarlo
   }
   else{
     puenteZitoAvanza();
